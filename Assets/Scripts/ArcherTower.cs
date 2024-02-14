@@ -17,7 +17,7 @@ public class ArcherTower : MonoBehaviour
     public string enemyTag = "Enemy";
 
     public Transform partToRotate;
-    public float turnSpeed = 8f;
+    public float turnSpeed = 20f;
 
     public GameObject arrowPrefab;
     public Transform firePoint;
@@ -71,10 +71,16 @@ public class ArcherTower : MonoBehaviour
     void Shoot()
     {
         GameObject arrowGO = (GameObject) Instantiate (arrowPrefab, firePoint.position, firePoint.rotation);
+        arrowGO.transform.localEulerAngles = new Vector3(arrowGO.transform.localEulerAngles.x, arrowGO.transform.localEulerAngles.y, arrowGO.transform.localEulerAngles.z);
         Arrow arrow = arrowGO.GetComponent<Arrow>();
 
+
         if (arrow != null)
+        {
+            Vector3 directionToTarget = (target.position - firePoint.position).normalized; // Calculate direction to target        
+            arrowGO.transform.rotation = Quaternion.LookRotation(directionToTarget); // Orient arrow t
             arrow.Seek(target);
+        }
     }
 
     void OnDrawGizmosSelected()

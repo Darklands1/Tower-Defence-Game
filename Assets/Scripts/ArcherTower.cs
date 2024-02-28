@@ -78,7 +78,7 @@ public class ArcherTower : MonoBehaviour
         if (arrow != null)
         {
             Vector3 directionToTarget = (target.position - firePoint.position).normalized; // Calculate direction to target        
-            arrowGO.transform.rotation = Quaternion.LookRotation(directionToTarget); // Orient arrow t
+            arrowGO.transform.rotation = Quaternion.LookRotation(directionToTarget); // Orient arrow towards target
             arrow.Seek(target);
         }
     }
